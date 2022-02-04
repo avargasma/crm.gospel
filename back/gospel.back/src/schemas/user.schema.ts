@@ -1,4 +1,4 @@
-import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import * as mongoose from 'mongoose';
 import * as bcrypt from 'bcrypt';
 
@@ -31,7 +31,7 @@ export const UserSchema = SchemaFactory.createForClass(Users);
 UserSchema.index({ email: 1 });
 
 UserSchema.pre('save', async function (next: any) {
-  let user = this as UserDocument;
+  const user = this as UserDocument;
 
   // only hash the password if it has been modified (or is new)
   if (!user.isModified('password')) {
@@ -41,7 +41,7 @@ UserSchema.pre('save', async function (next: any) {
   // Random additional data
   const salt = await bcrypt.genSalt(10);
 
-  const hash = await bcrypt.hashSync(user.password, salt);
+  const hash = bcrypt.hashSync(user.password, salt);
 
   // Replace the password with the hash
   user.password = hash;
@@ -50,9 +50,8 @@ UserSchema.pre('save', async function (next: any) {
 });
 
 UserSchema.methods.comparePassword = async function (
-    candidatePassword: string,
-  ) {
-    const user = this as UserDocument;
-  
-    return bcrypt.compare(candidatePassword, user.password).catch((e) => false);
-  };
+  candidatePassword: string,
+) {
+  const user = this as UserDocument;
+  return bcrypt.compare(candidatePassword, user.password).catch(() => false);
+};

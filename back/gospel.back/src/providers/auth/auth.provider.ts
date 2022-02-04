@@ -7,7 +7,7 @@ export class AuthProvider {
   constructor(
     @InjectModel(Users.name) private authorModel: Model<UserDocument>,
   ) {}
-  
+
   async getHello() {
     return this.authorModel.find();
   }
