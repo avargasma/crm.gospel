@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 import * as bcrypt from 'bcrypt';
 
 @Schema()
-export class User {
+export class Users {
   _id: number;
 
   @Prop({ required: true, unique: true })
@@ -24,9 +24,9 @@ export class User {
   comparePassword: (candidatePassword: string) => boolean;
 }
 
-export type UserDocument = User & mongoose.Document;
+export type UserDocument = Users & mongoose.Document;
 
-export const UserSchema = SchemaFactory.createForClass(User);
+export const UserSchema = SchemaFactory.createForClass(Users);
 
 UserSchema.index({ email: 1 });
 

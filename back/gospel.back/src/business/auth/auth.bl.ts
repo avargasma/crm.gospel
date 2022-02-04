@@ -5,7 +5,7 @@ import { AuthProvider } from 'src/providers/auth/auth.provider';
 export class AuthBusiness {
     constructor(private readonly provider: AuthProvider) {}
 
-  getHello(): string {
+  async getHello() {
     return this.provider.getHello();
   }
   
