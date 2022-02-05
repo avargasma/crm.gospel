@@ -4,6 +4,7 @@ import { GospelTexts, GospelTextSchema } from 'src/schemas/common/text.schema';
 import { TextController } from 'src/controllers/text/text.controller';
 import { TextBusiness } from 'src/business/common/text.bl';
 import { TextProvider } from 'src/providers/common/text.provider';
+import { RedisProvider } from 'src/providers/redis/redis.provider';
 
 @Module({
   imports: [
@@ -12,6 +13,6 @@ import { TextProvider } from 'src/providers/common/text.provider';
     ]),
   ],
   controllers: [TextController],
-  providers: [TextBusiness, TextProvider],
+  providers: [TextBusiness, TextProvider, RedisProvider],
 })
 export class TextModule {}
