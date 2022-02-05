@@ -1,3 +1,4 @@
+import { InjectRedis, Redis } from '@nestjs-modules/ioredis';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -8,11 +9,19 @@ import { Users, UserDocument } from 'src/schemas/user/user.schema';
 @Injectable()
 export class UserProvider {
   constructor(
+    @InjectRedis() private readonly redis: Redis,
     @InjectModel(Users.name) private userModel: Model<UserDocument>,
   ) {}
 
   async getAllUsers() {
-    return this.userModel.find();
+    let redisData = await this.redis.get('getAllUsers');
+    if (!redisData) {
+      redisData = await this.userModel.find();
+      await this.redis.set('getAllUsers', JSON.stringify(redisData));
+    } else {
+      return JSON.parse(redisData);
+    }
+    return redisData;
   }
 
   async getUserById(id: string) {

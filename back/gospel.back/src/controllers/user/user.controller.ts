@@ -22,7 +22,6 @@ export class UserController {
   @Get()
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @ApiBearerAuth()
   async getAllUsers(): Promise<Users[]> {
     return await this.userBl.getAllUsers();
   }
@@ -30,7 +29,6 @@ export class UserController {
   @Get(':id')
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @ApiBearerAuth()
   async getUserById(@Param('id') id: string): Promise<Users> {
     return await this.userBl.getUserById(id);
   }
@@ -43,7 +41,6 @@ export class UserController {
   @Put(':id')
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @ApiBearerAuth()
   async updateUser(
     @Param('id') id: string,
     @Body() user: UserDTO,
@@ -54,7 +51,6 @@ export class UserController {
   @UseGuards(AuthGuard('jwt'))
   @ApiBearerAuth()
   @Delete(':id')
-  @ApiBearerAuth()
   async deleteUser(@Param('id') id: string): Promise<void> {
     return await this.userBl.deleteUser(id);
   }
