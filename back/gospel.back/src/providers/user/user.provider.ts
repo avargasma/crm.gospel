@@ -19,6 +19,10 @@ export class UserProvider {
     return this.userModel.findById(id).lean();
   }
 
+  async getUserByEmail(email: string) {
+    return this.userModel.findOne({ email }).select('-__v -confirmToken');
+  }
+
   async newUser(user: UserDTO) {
     const confirmToken = nanoid(32);
     return this.userModel.create({ ...user, confirmToken, active: true });

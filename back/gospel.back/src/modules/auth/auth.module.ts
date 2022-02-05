@@ -8,6 +8,10 @@ import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
 import { JwtStrategy } from './JwtStrategy';
 import { key } from './constants';
+import { GoogleStrategy } from './googleStrategy';
+import { AuthGoogleController } from 'src/controllers/auth/auth.google.controller';
+import { AuthGoogleBusiness } from 'src/business/auth/google.auth.bl';
+import { UserProvider } from 'src/providers/user/user.provider';
 
 @Module({
   imports: [
@@ -18,7 +22,14 @@ import { key } from './constants';
       signOptions: { expiresIn: '3h' },
     }),
   ],
-  controllers: [AuthController],
-  providers: [AuthBusiness, AuthProvider, JwtStrategy],
+  controllers: [AuthController, AuthGoogleController],
+  providers: [
+    AuthBusiness,
+    AuthGoogleBusiness,
+    AuthProvider,
+    UserProvider,
+    JwtStrategy,
+    GoogleStrategy,
+  ],
 })
 export class AuthModule {}
