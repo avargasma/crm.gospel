@@ -15,7 +15,19 @@ export class UserBusiness {
     return this.provider.getUserById(id) as unknown as Promise<Users>;
   }
 
+  async getUserByEmail(email: string) {
+    return this.provider.getUserByEmail(email) as unknown as Promise<Users>;
+  }
+
+  async userExistByEmail(email: string) {
+    const user = await this.provider.getUserByEmail(email);
+    return user !== null;
+  }
+
   async newUser(user: UserDTO): Promise<Users> {
+    const userExist = await this.provider.getUserByEmail(user.email);
+    if (userExist) return null;
+
     return this.provider.newUser(user) as unknown as Promise<Users>;
   }
 

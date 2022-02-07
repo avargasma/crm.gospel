@@ -5,7 +5,7 @@ import * as mongoose from 'mongoose';
 export class GospelTexts {
   _id: number;
 
-  @Prop({ required: true, unique: true })
+  @Prop({ required: true })
   key: string;
 
   @Prop({ required: true })
@@ -19,4 +19,4 @@ export type GospelTextDocument = GospelTexts & mongoose.Document;
 
 export const GospelTextSchema = SchemaFactory.createForClass(GospelTexts);
 
-GospelTextSchema.index({ key: 1 });
+GospelTextSchema.index({ key: 1, languageCode: 1 }, { unique: true });

@@ -14,7 +14,8 @@ export class AuthBusiness {
     const user = (await this.provider.getUserByEmail(
       username,
     )) as unknown as Users;
-    return user.comparePassword(pass);
+    if (user) return user.comparePassword(pass);
+    else return false;
   }
 
   async generateAccessToken(name: string) {

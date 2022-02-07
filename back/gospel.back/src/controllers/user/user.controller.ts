@@ -12,7 +12,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { UserBusiness } from 'src/business/user/user.bl';
 import { Users } from 'src/schemas/user/user.schema';
-import { UserDTO } from 'src/schemas/user/user.DTO';
+import { UserDTO, userEmailDTO } from 'src/schemas/user/user.DTO';
 
 @ApiTags('User')
 @Controller('user')
@@ -36,6 +36,11 @@ export class UserController {
   @Post()
   async newUser(@Body() user: UserDTO): Promise<Users> {
     return await this.userBl.newUser(user);
+  }
+
+  @Post('userExist')
+  async userExistByEmail(@Body() user: userEmailDTO): Promise<boolean> {
+    return await this.userBl.userExistByEmail(user.email);
   }
 
   @Put(':id')

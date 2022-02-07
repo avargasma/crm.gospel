@@ -15,7 +15,7 @@ export class AuthController {
     const { user, pass } = loginDTO;
     const valid = await this.authBusiness.validateUser(user, pass);
     if (!valid) {
-      throw new UnauthorizedException();
+      return { access_token: null };
     }
     return await this.authBusiness.generateAccessToken(user);
   }
