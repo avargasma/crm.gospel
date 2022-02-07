@@ -23,7 +23,7 @@ export class SettingsController {
     return await this.commonBl.refreshCache();
   }
 
-  @Post('saveSetting')
+  @Post()
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   async saveSetting(setting: Settings): Promise<Settings> {
