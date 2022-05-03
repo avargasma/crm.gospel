@@ -13,7 +13,7 @@ import { ChurchModule } from './modules/church/church.module';
     AuthModule,
     UserModule,
     CommonModule,
-    ChurchModule
+    ChurchModule,
   ],
 })
 export class AppModule {}

@@ -13,7 +13,13 @@ export class Users {
   name: string;
 
   @Prop({ required: true })
+  lastName: string;
+
+  @Prop({ required: true })
   password: string;
+
+  @Prop({ required: true })
+  churchId: string;
 
   @Prop({ required: true })
   confirmToken: string;

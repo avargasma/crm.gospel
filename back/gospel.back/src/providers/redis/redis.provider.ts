@@ -14,7 +14,7 @@ export class RedisProvider {
         key,
         JSON.stringify(redisData),
         'EX',
-        process.env.TIMEOUT_GENERAL_CACHE,
+        process.env.TIMEOUT_GENERAL_CACHE || 300,
       );
     } else {
       return JSON.parse(redisData);
