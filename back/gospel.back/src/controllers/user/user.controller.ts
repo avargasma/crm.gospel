@@ -20,8 +20,6 @@ export class UserController {
   constructor(private readonly userBl: UserBusiness) {}
 
   @Get()
-  @ApiBearerAuth()
-  @UseGuards(AuthGuard('jwt'))
   async getAllUsers(): Promise<Users[]> {
     return await this.userBl.getAllUsers();
   }
